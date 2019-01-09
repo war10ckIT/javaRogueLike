@@ -5,6 +5,7 @@
 # Ignore an entire directory
 /.settings/
 /target/
+/system/
 
 # Compiled class file
 *.class
