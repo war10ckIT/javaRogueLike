@@ -6,6 +6,7 @@
 /.settings/
 /target/
 /system/
+/logs/
 
 # Compiled class file
 *.class
