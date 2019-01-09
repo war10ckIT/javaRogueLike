@@ -1,3 +1,11 @@
+# Ignore a single file
+.classpath
+.project
+
+# Ignore an entire directory
+/.settings/
+/target/
+
 # Compiled class file
 *.class
 
