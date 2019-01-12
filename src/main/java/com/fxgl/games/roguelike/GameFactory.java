@@ -10,6 +10,9 @@ import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.TextEntityFactory;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.entity.view.EntityView;
+import com.almasb.fxgl.extra.entity.components.HealthComponent;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.almasb.fxgl.physics.HitBox;
 import com.fxgl.games.roguelike.control.BombControl;
 import com.fxgl.games.roguelike.control.PlayerControl;
 
@@ -51,9 +54,11 @@ public class GameFactory implements TextEntityFactory {
         return Entities.builder()
                 .type(GameTypes.PLAYER)
                 .from(data)
-                .viewFromNodeWithBBox(new Rectangle(GameApp.TILE_SIZE, GameApp.TILE_SIZE, Color.BLUE))
+                .bbox(new HitBox("BODY", BoundingShape.box(GameApp.TILE_SIZE, GameApp.TILE_SIZE)))
+                .viewFromTexture("player.png")
+                //.viewFromNodeWithBBox(new Rectangle(GameApp.TILE_SIZE, GameApp.TILE_SIZE, Color.BLUE))
                 .with(new CollidableComponent(true))
-                .with(new PlayerControl())
+                .with(new PlayerControl(), new HealthComponent(100))
                 .build();
     }
 

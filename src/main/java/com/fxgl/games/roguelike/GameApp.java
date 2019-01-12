@@ -11,6 +11,7 @@ import com.almasb.fxgl.settings.GameSettings;
 import com.fxgl.games.roguelike.control.PlayerControl;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class GameApp extends GameApplication {
 
@@ -64,9 +65,8 @@ public class GameApp extends GameApplication {
             }
         }, KeyCode.F);
     }
-
-    @Override
-    protected void initGame() {
+    
+    private void initBackground() {
     	GameFactory factory = new GameFactory();
     	getGameWorld().addEntityFactory(factory);
     	
@@ -76,9 +76,23 @@ public class GameApp extends GameApplication {
         getGameWorld().setLevel(level);
 
         getGameWorld().spawn("BG");
-
-        player = getGameWorld().spawn("Player");
+        getGameScene().setBackgroundColor(Color.BLACK);
+    }
+    
+    private void initPlayer() {
+    	player = getGameWorld().spawn("Player");
         playerControl = player.getComponent(PlayerControl.class);
+        
+        getGameScene().getViewport().setBounds(Integer.MIN_VALUE, Integer.MIN_VALUE, 
+        		Integer.MAX_VALUE, Integer.MAX_VALUE);
+        
+        getGameScene().getViewport().bindToEntity(player, getWidth() / 2, getHeight() / 2);
+    }
+
+    @Override
+    protected void initGame() {
+    	initBackground();
+    	initPlayer();
     }
 
     @Override
